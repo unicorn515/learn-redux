@@ -12,7 +12,6 @@ class App extends React.Component {
     this.unsubscribe = this.store.subscribe(() => {
       this.setState(this.store.getState());
     });
-    // actions.fetchBooks(this.store.dispatch);
     this.store.dispatch(actions.fetchBooks());
   }
 
