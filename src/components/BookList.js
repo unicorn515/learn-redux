@@ -6,7 +6,9 @@ const BookList = (props) => {
     <div>
       {props.books.map(book => {
         return (
-          <Book key={book.id} {...book} />
+          <Book key={book.id}
+            deleteBook={props.deleteBook}
+            {...book} />
         );
       })}
     </div>
@@ -14,7 +16,8 @@ const BookList = (props) => {
 };
 
 BookList.propTypes = {
-  books: React.PropTypes.array.isRequired
+  books: React.PropTypes.array.isRequired,
+  deleteBook: React.PropTypes.func.isRequired,
 };
 
 export default BookList;

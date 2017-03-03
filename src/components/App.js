@@ -1,16 +1,25 @@
 import React from 'react';
 import BookList from './BookList';
 
-import { getBookList } from '../../api/data';
+import * as api from '../../api/data';
 
 class App extends React.Component {
   state = {
-    books: getBookList()
+    books: api.getBookList()
+  };
+  deleteBook = (bookId) => {
+    api.deleteBook(bookId);
+
+    this.setState(prevState => ({
+      books: prevState.books.filter(book => book.id !== bookId)
+    }));
   };
   render() {
     return (
       <div className="App">
-        <BookList books={this.state.books} />
+        <BookList
+          deleteBook={this.deleteBook}
+          books={this.state.books} />
       </div>
     );
   }

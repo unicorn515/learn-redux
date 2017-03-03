@@ -71,3 +71,14 @@ export const getBookList = () => {
 export const getAuthorInfo = (authorId) => {
   return {...data.data.authors[authorId]};
 };
+
+export const deleteBook = (bookId) => {
+  // data.data.books
+  const bookIndex = data.data.books.findIndex((book) => {
+    return book.id === bookId;
+  });
+
+  data.data.books.splice(bookIndex, 1);
+
+  console.log(data.data.books);
+}
