@@ -1,27 +1,36 @@
 import React from 'react';
 import BookList from './BookList';
 
-// import * as api from '../../api/data';
-
-import store from '../store';
+import storeConfig from '../store';
+import * as actions from '../actions';
 
 class App extends React.Component {
-  state = {
-    books: store.getState().books
-  };
+  store = storeConfig();
+  state = this.store.getState();
+
+  componentDidMount() {
+    this.unsubscribe = this.store.subscribe(() => {
+      this.setState(this.store.getState());
+    });
+    // actions.fetchBooks(this.store.dispatch);
+    this.store.dispatch(actions.fetchBooks());
+  }
+
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   deleteBook = (bookId) => {
-    // api.deleteBook(bookId);
-    //
-    // this.setState(prevState => ({
-    //   books: prevState.books.filter(book => book.id !== bookId)
-    // }));
+    this.store.dispatch(actions.deleteBook(bookId));
   };
   render() {
     return (
       <div className="App">
+        <h2>Book Store</h2>
         <BookList
           deleteBook={this.deleteBook}
           books={this.state.books} />
+        <hr />
       </div>
     );
   }
