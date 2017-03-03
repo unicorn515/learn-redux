@@ -5,8 +5,10 @@ import path from 'path';
 // import serverRender from './serverRender';
 import express from 'express';
 import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 const server = express();
+server.use(morgan('dev'));
 server.use(bodyParser.json());
 
 server.use(sassMiddleware({

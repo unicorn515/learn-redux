@@ -2,7 +2,7 @@ import { types } from '../actions';
 
 const reducer = (state, action) => {
   switch (action.type) {
-  case types.DELETE_BOOK:
+  case types.BOOK_DELETED:
     return {
       ...state,
       books: state.books.filter(book => book.id !== action.bookId),
@@ -11,7 +11,7 @@ const reducer = (state, action) => {
     return {
       ...state,
       ...action.data,
-    }
+    };
   default:
     return Object.assign({}, state);
   }
