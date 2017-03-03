@@ -26,9 +26,16 @@ class App extends React.Component {
     return (
       <div className="App">
         <h2>Book Store</h2>
-        <BookList
-          deleteBook={this.deleteBook}
-          books={this.state.books} />
+        { this.state.currentError &&
+          <div style={{color: 'red'}}>
+            {this.state.currentError}
+          </div>
+         }
+        { this.state.showLoader ?
+          <div>Loading....</div> :
+          <BookList
+            deleteBook={this.deleteBook}
+            books={this.state.books} /> }
         <hr />
       </div>
     );

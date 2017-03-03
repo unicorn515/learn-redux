@@ -66,7 +66,7 @@ const data = {
 };
 
 router.get('/data', (req, res) => {
-  res.send(data);
+  setTimeout(() => res.send(data), 0);
 });
 
 router.delete('/books/:bookId', (req, res) => {
@@ -75,6 +75,8 @@ router.delete('/books/:bookId', (req, res) => {
   });
 
   data.books.splice(bookIndex, 1);
+
+  snaoeuhnsaoeuhs;
 
   res.send({ deletedBookId: req.params.bookId });
 });
