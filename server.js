@@ -17,17 +17,18 @@ server.use(sassMiddleware({
 server.set('view engine', 'ejs');
 
 server.get(['/'], (req, res) => {
-  serverRender(req.params.contestId)
-    .then(({ initialMarkup, initialData }) => {
-      res.render('index', {
-        initialMarkup,
-        initialData
-      });
-    })
-    .catch(error => {
-      console.error(error);
-      res.status(404).send('Bad Request');
-    });
+  // serverRender(req.params.contestId)
+  //   .then(({ initialMarkup, initialData }) => {
+  //     res.render('index', {
+  //       initialMarkup,
+  //       initialData
+  //     });
+  //   })
+  //   .catch(error => {
+  //     console.error(error);
+  //     res.status(404).send('Bad Request');
+  //   });
+  res.render('index2');
 });
 
 server.use('/api', apiRouter);
