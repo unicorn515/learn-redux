@@ -23,7 +23,7 @@ export const deleteBook = (bookId) => {
           });
         }
       })
-      .catch(dispatch(reportError()));
+      .catch(() => dispatch(reportError()));
   };
 };
 
@@ -37,6 +37,6 @@ export const fetchBooks = () => {
         type: types.RECEIVE_DATA,
         data: resp.data,
       });
-    }).catch(dispatch(reportError()));
+    }).catch(() => dispatch(reportError()));
   };
 };

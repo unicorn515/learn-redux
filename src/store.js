@@ -1,6 +1,8 @@
-const { createStore, applyMiddleware } = require('redux');
+const { createStore, applyMiddleware, compose } = require('redux');
 
 import thunk from 'redux-thunk';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialState = {
   books: [],
@@ -13,7 +15,7 @@ const storeConfig = () => {
   return createStore(
     reducer,
     initialState,
-    applyMiddleware(thunk),
+    composeEnhancers(applyMiddleware(thunk)),
   );
 };
 

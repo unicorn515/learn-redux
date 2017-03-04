@@ -16,8 +16,13 @@ const BookList = (props) => {
 };
 
 BookList.propTypes = {
-  books: React.PropTypes.array.isRequired,
+  books: React.PropTypes.array,
   deleteBook: React.PropTypes.func.isRequired,
 };
+
+BookList.defaultProps = {
+  books: [],
+};
+
 
 export default BookList;

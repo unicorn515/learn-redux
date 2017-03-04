@@ -1,45 +1,49 @@
 import React from 'react';
 import BookList from './BookList';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import storeConfig from '../store';
 import * as actions from '../actions';
 
 class App extends React.Component {
-  store = storeConfig();
-  state = this.store.getState();
-
   componentDidMount() {
-    this.unsubscribe = this.store.subscribe(() => {
-      this.setState(this.store.getState());
-    });
-    this.store.dispatch(actions.fetchBooks());
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
+    this.props.actions.fetchBooks();
   }
 
   deleteBook = (bookId) => {
-    this.store.dispatch(actions.deleteBook(bookId));
+    this.props.actions.deleteBook(bookId);
   };
+
   render() {
     return (
       <div className="App">
         <h2>Book Store</h2>
-        { this.state.currentError &&
+        { this.props.currentError &&
           <div style={{color: 'red'}}>
-            {this.state.currentError}
+            {this.props.currentError}
           </div>
          }
-        { this.state.showLoader ?
+        { this.props.showLoader ?
           <div>Loading....</div> :
           <BookList
             deleteBook={this.deleteBook}
-            books={this.state.books} /> }
+            books={this.props.books} /> }
         <hr />
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    ...state
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
